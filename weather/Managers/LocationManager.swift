@@ -17,6 +17,7 @@ class LocationManager: NSObject {
     
     static let shared: LocationManager = LocationManager() //singleton
     private let locationManager: CLLocationManager = CLLocationManager()
+    var locationOnce = false
 
     var delegate: LocationManagerDelegate?
     var location: CLLocation?
@@ -25,16 +26,20 @@ class LocationManager: NSObject {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-    }
+     }
     
     func requestLocationAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    func requestLocation(completionHandler: @escaping () -> ()) {
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.requestLocation()
-         }
+    func stopLocationManager() {
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+    }
+    
+    func startLocationManager() {
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
     }
     
 }
@@ -42,12 +47,25 @@ class LocationManager: NSObject {
 extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        delegate?.locationManager(locationManager, didChangeAuthorization: status)
+
+        switch status {
+                case .notDetermined:
+                    manager.requestWhenInUseAuthorization()
+                case .authorizedWhenInUse:
+                    manager.startUpdatingLocation()
+                case .authorizedAlways:
+                    manager.startUpdatingLocation()
+                default:
+                    requestLocationAuthorization()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.first
-    }
+        guard !locationOnce else { return }
+        location = locations.last 
+        locationOnce = true
+        NotificationCenter.default.post(name: Notification.Name("locationOK"), object: nil)
+        }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
