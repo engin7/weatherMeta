@@ -42,6 +42,7 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
          
         networkManager.get(get: .detailsId, location: result, completion: {success in
             if success {
+                vc.tableViewDataSource.cityWeather = self.networkManager.cityById?.consolidatedWeather
                 self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 self.showNetworkError()

@@ -10,7 +10,7 @@ import UIKit
 
 class WeatherDataSource: NSObject, UITableViewDataSource {
     
-    private let cityWeather = NetworkManager.shared.cityById?.consolidatedWeather
+    var cityWeather: [LocationDetails.ConsolidatedWeather]?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
