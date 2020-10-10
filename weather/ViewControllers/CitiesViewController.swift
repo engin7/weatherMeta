@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CitiesViewController: UIViewController, UITableViewDelegate {
+class CitiesViewController: UIViewController, UITableViewDelegate, Loadable {
 
     private let tableViewDataSource = CitiesDataSource()
     private let networkManager = NetworkManager.shared
@@ -17,6 +17,7 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showLoadingView()
         self.title = "Nearby Cities"
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "Cities", style: .plain, target: nil, action: nil)
@@ -30,7 +31,7 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
         networkManager.get(get: .nearbyCities, location: nil, completion: {success in
             if success {
                 self.citiesTableView.reloadData()
-                // add HUD
+                self.hideLoadingView()
             } else {
                 self.showNetworkError()
             }
@@ -38,7 +39,7 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        showLoadingView()
         tableView.deselectRow(at: indexPath, animated: true)
         let result = networkManager.citiesNearby[indexPath.row]
         let identifier = String(describing: CitiesDetailViewController.self)
@@ -48,6 +49,7 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
             if success {
                 vc.tableViewDataSource.cityWeather = self.networkManager.cityById?.consolidatedWeather
                 vc.title = result.title
+                self.hideLoadingView()
                 self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 self.showNetworkError()
