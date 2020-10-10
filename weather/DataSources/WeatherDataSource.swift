@@ -21,6 +21,11 @@ class WeatherDataSource: NSObject, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WeatherTableViewCell
         cell.day.text = cityWeather?[indexPath.row].applicable_date
+        if let minTemp = cityWeather?[indexPath.row].min_temp, let maxTemp = cityWeather?[indexPath.row].max_temp  {
+            cell.temp.text = String(format:"%.1f",maxTemp) + "C° / " + String(format:"%.1f",minTemp) + "C°"
+        }
+       
+        
         cell.weatherImage.loadImageUsingCache(withUrl: cityWeather?[indexPath.row].weather_state_abbr ?? "")
         return  cell
     }

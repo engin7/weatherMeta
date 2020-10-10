@@ -71,7 +71,7 @@
         <!--Cities Detail View Controller-->
         <scene sceneID="sKT-QO-de4">
             <objects>
-                <viewController storyboardIdentifier="detailVC" id="u5D-4G-HF5" customClass="CitiesDetailViewController" customModule="weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CitiesDetailViewController" id="u5D-4G-HF5" customClass="CitiesDetailViewController" customModule="weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bFY-2i-ItA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,16 +95,34 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8B-Lo-Nbd">
-                                                    <rect key="frame" x="140" y="11" width="29.5" height="21"/>
+                                                    <rect key="frame" x="184" y="11" width="29.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5y-PJ-D7U">
+                                                    <rect key="frame" x="118.5" y="11" width="40.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="temp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaW-os-UMe">
+                                                    <rect key="frame" x="118" y="40" width="43.5" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="h8B-Lo-Nbd" firstAttribute="leading" secondItem="cVh-vi-9qd" secondAttribute="trailing" constant="44" id="UgS-9F-xSl"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h8B-Lo-Nbd" secondAttribute="trailing" constant="20" symbolic="YES" id="cgX-Cd-TAC"/>
+                                                <constraint firstItem="XaW-os-UMe" firstAttribute="top" secondItem="N5y-PJ-D7U" secondAttribute="bottom" constant="8" symbolic="YES" id="0XU-xr-gI9"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h8B-Lo-Nbd" secondAttribute="trailing" constant="20" symbolic="YES" id="6Jb-We-oJx"/>
+                                                <constraint firstItem="h8B-Lo-Nbd" firstAttribute="leading" secondItem="vk0-Zg-6ZQ" secondAttribute="leading" constant="184" id="BUB-ZW-rrb"/>
+                                                <constraint firstItem="XaW-os-UMe" firstAttribute="leading" secondItem="cVh-vi-9qd" secondAttribute="trailing" constant="22" id="FEk-6I-n3k"/>
+                                                <constraint firstItem="h8B-Lo-Nbd" firstAttribute="leading" secondItem="N5y-PJ-D7U" secondAttribute="trailing" constant="25" id="LOp-HQ-w9F"/>
+                                                <constraint firstItem="N5y-PJ-D7U" firstAttribute="baseline" secondItem="h8B-Lo-Nbd" secondAttribute="baseline" id="Ssd-AT-nij"/>
+                                                <constraint firstItem="N5y-PJ-D7U" firstAttribute="leading" secondItem="cVh-vi-9qd" secondAttribute="trailing" constant="22.5" id="U69-iX-Y9B"/>
                                                 <constraint firstItem="cVh-vi-9qd" firstAttribute="bottom" secondItem="vk0-Zg-6ZQ" secondAttribute="bottomMargin" id="f1T-62-dqX"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XaW-os-UMe" secondAttribute="trailing" constant="20" symbolic="YES" id="jJU-eV-XPD"/>
                                                 <constraint firstItem="cVh-vi-9qd" firstAttribute="leading" secondItem="vk0-Zg-6ZQ" secondAttribute="leadingMargin" id="yRJ-LS-kBr"/>
                                                 <constraint firstItem="h8B-Lo-Nbd" firstAttribute="top" secondItem="cVh-vi-9qd" secondAttribute="top" id="ylg-gr-pfH"/>
                                                 <constraint firstItem="cVh-vi-9qd" firstAttribute="top" secondItem="vk0-Zg-6ZQ" secondAttribute="topMargin" id="yp1-iZ-iPb"/>
@@ -112,6 +130,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="day" destination="h8B-Lo-Nbd" id="cHT-KA-3h4"/>
+                                            <outlet property="temp" destination="XaW-os-UMe" id="lGP-wL-3oX"/>
                                             <outlet property="weatherImage" destination="cVh-vi-9qd" id="RVk-Yz-KsX"/>
                                         </connections>
                                     </tableViewCell>

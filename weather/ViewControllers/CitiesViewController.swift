@@ -38,7 +38,8 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
         let result = networkManager.citiesNearby[indexPath.row]
-        let vc = storyboard?.instantiateViewController(withIdentifier: "detailVC") as! CitiesDetailViewController
+        let identifier = String(describing: CitiesDetailViewController.self)
+        let vc = storyboard?.instantiateViewController(withIdentifier: identifier) as! CitiesDetailViewController
          
         networkManager.get(get: .detailsId, location: result, completion: {success in
             if success {
