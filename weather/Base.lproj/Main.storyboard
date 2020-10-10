@@ -155,21 +155,33 @@
             </objects>
             <point key="canvasLocation" x="2495.1999999999998" y="1139.2803598200901"/>
         </scene>
-        <!--Locations-->
+        <!--Location-->
         <scene sceneID="mj9-tv-vtu">
             <objects>
                 <viewController id="6FZ-XO-9jd" customClass="LocationsViewController" customModule="weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iPp-vE-xtv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxi-Uu-Z4k">
+                                <rect key="frame" x="87" y="271" width="201" height="124"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="NZp-VA-iY5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Locations" id="PaQ-XG-4ds"/>
+                    <navigationItem key="navigationItem" title="Location" id="2Nx-s4-O09"/>
+                    <connections>
+                        <outlet property="adress" destination="nxi-Uu-Z4k" id="uQk-ri-aj4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UhD-dW-waq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1556" y="-335"/>
+            <point key="canvasLocation" x="2495.1999999999998" y="-335.08245877061472"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ovx-U1-AFA">
@@ -181,7 +193,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="6FZ-XO-9jd" kind="relationship" relationship="viewControllers" id="4tM-tR-liH"/>
+                        <segue destination="K06-P5-SrG" kind="relationship" relationship="viewControllers" id="4tM-tR-liH"/>
                         <segue destination="z4f-gr-daO" kind="relationship" relationship="viewControllers" id="vnK-uQ-kmz"/>
                     </connections>
                 </tabBarController>
@@ -189,11 +201,11 @@
             </objects>
             <point key="canvasLocation" x="431" y="39"/>
         </scene>
-        <!--Cities-->
+        <!--Navigation Controller-->
         <scene sceneID="bwe-h7-cdS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="z4f-gr-daO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Cities" id="FSa-M5-xl9"/>
+                    <tabBarItem key="tabBarItem" image="building.2.fill" catalog="system" selectedImage="building.2.fill" id="FSa-M5-xl9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jpn-0R-7ti">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -226,8 +238,29 @@
             </objects>
             <point key="canvasLocation" x="1556" y="1139.2803598200901"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Pm0-sC-TWB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K06-P5-SrG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" image="location.fill" catalog="system" selectedImage="location.fill" id="PaQ-XG-4ds"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IeL-9i-ucM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6FZ-XO-9jd" kind="relationship" relationship="rootViewController" id="Wtg-mY-TIB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="at3-9Z-o21" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1556" y="-335.08245877061472"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="building.2.fill" catalog="system" width="128" height="106"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 protocol LocationManagerDelegate: class {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
@@ -18,14 +19,32 @@ class LocationManager: NSObject {
     static let shared: LocationManager = LocationManager() //singleton
     private let locationManager: CLLocationManager = CLLocationManager()
     var locationOnce = false
-
     var delegate: LocationManagerDelegate?
     var location: CLLocation?
+    var addressString = ""
     
     private override init() {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        lookUpCurrentLocation(completionHandler: { [self]placemark in
+            if placemark?.subLocality != nil {
+                 addressString = addressString + (placemark?.subLocality)! + ", "
+            }
+            if placemark?.thoroughfare != nil {
+                addressString = addressString + (placemark?.thoroughfare)! + ", "
+            }
+            if placemark?.locality != nil {
+                addressString = addressString + (placemark?.locality)! + ", "
+            }
+            if placemark?.country != nil {
+                addressString = addressString + (placemark?.country)! + ", "
+            }
+            if placemark?.postalCode != nil {
+                addressString = addressString + (placemark?.postalCode)! + " "
+            }
+            NotificationCenter.default.post(name: Notification.Name("adressOK"), object: nil)
+        })
      }
     
     func requestLocationAuthorization() {
@@ -41,6 +60,32 @@ class LocationManager: NSObject {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
     }
+    
+    func lookUpCurrentLocation(completionHandler: @escaping (CLPlacemark?)
+                                -> Void ) {
+        // Use the last reported location.
+        if let lastLocation = self.locationManager.location {
+            let geocoder = CLGeocoder()
+            
+            // Look up the location and pass it to the completion handler
+            geocoder.reverseGeocodeLocation(lastLocation,
+                                            completionHandler: { (placemarks, error) in
+                                                if error == nil {
+                                                    let firstLocation = placemarks?[0]
+                                                    completionHandler(firstLocation)
+                                                }
+                                                else {
+                                                    // An error occurred during geocoding.
+                                                    completionHandler(nil)
+                                                }
+                                            })
+        }
+        else {
+            // No location was available.
+            completionHandler(nil)
+        }
+    }
+ 
     
 }
 
@@ -71,4 +116,5 @@ extension LocationManager: CLLocationManagerDelegate {
     {
         delegate?.locationManager(locationManager, didFailWithError: error)
     }
+
 }

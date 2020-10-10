@@ -126,10 +126,10 @@
 				10A1459C252CFA9A00609F59 /* LaunchScreen.storyboard */,
 				10A14597252CFA9600609F59 /* Main.storyboard */,
 				1032B3D92531992800D461AF /* UIImageViewExtension.swift */,
-				10A145C9252CFAFB00609F59 /* Managers */,
 				10A145E4252D113900609F59 /* Models.swift */,
+				10A145C9252CFAFB00609F59 /* Managers */,
 				10A14606252F6EAB00609F59 /* Cells */,
-				10A145FA252F6CA700609F59 /* DataSources */,
+				10A145FA252F6CA700609F59 /* ViewModels */,
 				10A145DD252D01E700609F59 /* ViewControllers */,
 			);
 			path = weather;
@@ -172,13 +172,13 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		10A145FA252F6CA700609F59 /* DataSources */ = {
+		10A145FA252F6CA700609F59 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				10A145F2252F6C9400609F59 /* CitiesDataSource.swift */,
 				1032B3D42531913E00D461AF /* WeatherDataSource.swift */,
 			);
-			path = DataSources;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		10A14606252F6EAB00609F59 /* Cells */ = {

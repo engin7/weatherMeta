@@ -17,6 +17,9 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Nearby Cities"
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "Cities", style: .plain, target: nil, action: nil)
         citiesTableView.dataSource =  tableViewDataSource
         locationManager.locationOnce = false
         let nc = NotificationCenter.default
@@ -44,6 +47,7 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
         networkManager.get(get: .detailsId, location: result, completion: {success in
             if success {
                 vc.tableViewDataSource.cityWeather = self.networkManager.cityById?.consolidatedWeather
+                vc.title = result.title
                 self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 self.showNetworkError()

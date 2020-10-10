@@ -16,7 +16,6 @@ struct Location: Codable {
     let woeid: Int?
 }
 
-
 struct LocationDetails: Codable {
     
     let consolidatedWeather: [ConsolidatedWeather]

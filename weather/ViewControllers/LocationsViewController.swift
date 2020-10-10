@@ -10,16 +10,20 @@ import CoreLocation
 
 class LocationsViewController: UIViewController {
 
-    var nearbyLocations: [Location] = [Location]()
-    private let location = LocationManager.shared
-
+    private let locationManager = LocationManager.shared
+    
+    @IBOutlet weak var adress: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        location.requestLocationAuthorization()
-
+        locationManager.requestLocationAuthorization()
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(reverseGeoCoding), name: Notification.Name("adressOK"), object: nil)
     }
- 
+    
+    @objc func reverseGeoCoding() {
+        adress.text = locationManager.addressString
+    }
      
 
 }
