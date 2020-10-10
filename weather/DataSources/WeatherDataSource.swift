@@ -10,17 +10,18 @@ import UIKit
 
 class WeatherDataSource: NSObject, UITableViewDataSource {
     
-    private let networkManager = NetworkManager.shared
-
+    private let cityWeather = NetworkManager.shared.cityById?.consolidatedWeather
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return networkManager.cityById?.consolidatedWeather.count ?? 0
+        return cityWeather?.count ?? 0
         }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WeatherTableViewCell
-        cell.day.text = networkManager.cityById?.consolidatedWeather[indexPath.row].applicable_date
+        cell.day.text = cityWeather?[indexPath.row].applicable_date
+        cell.weatherImage.loadImageUsingCache(withUrl: cityWeather?[indexPath.row].weather_state_abbr ?? "")
         return  cell
     }
 }

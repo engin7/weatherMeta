@@ -47,8 +47,6 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
                 self.showNetworkError()
             }
         })
-       
-        
        }
     
     // MARK:- Helper Methods
@@ -60,11 +58,9 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
         (UIAlertAction) in
         self.getNearbyCities()
         })
-        
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-     
     }
     
  

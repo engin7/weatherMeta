@@ -13,7 +13,7 @@ class NetworkManager {
     static let shared = NetworkManager() // singleton
  
     private let nearbyURL = "https://www.metaweather.com/api/location/search/?lattlong="
-    private let byIdURL = "https://www.metaweather.com/api/location/" //+(woeid)
+    private let byIdURL = "https://www.metaweather.com/api/location/"  
     private var dataTask: URLSessionDataTask? = nil
     
     var cityById:LocationDetails?
