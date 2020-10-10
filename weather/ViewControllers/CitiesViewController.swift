@@ -28,11 +28,43 @@ class CitiesViewController: UIViewController, UITableViewDelegate {
             if success {
                 self.citiesTableView.reloadData()
                 // add HUD
+            } else {
+                self.showNetworkError()
             }
         })
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        let result = networkManager.citiesNearby[indexPath.row]
+        let vc = storyboard?.instantiateViewController(withIdentifier: "detailVC") as! CitiesDetailViewController
+         
+        networkManager.get(get: .detailsId, location: result, completion: {success in
+            if success {
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                self.showNetworkError()
+            }
+        })
+       
+        
+       }
+    
+    // MARK:- Helper Methods
+    
+    func showNetworkError() {
+        let alert = UIAlertController(title: "Sorry...", message: "Error occured connecting the Server. Please check your connection and try again.", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Retry", style: .default, handler: {
+        (UIAlertAction) in
+        self.getNearbyCities()
+        })
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
      
     }
     
-    // select row for details
+ 

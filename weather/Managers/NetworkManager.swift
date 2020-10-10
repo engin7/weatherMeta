@@ -16,9 +16,9 @@ class NetworkManager {
     private let byIdURL = "https://www.metaweather.com/api/location/" //+(woeid)
     private var dataTask: URLSessionDataTask? = nil
     
-    var locationById:LocationDetails?
+    var cityById:LocationDetails?
     var citiesNearby: [Location] = []
-    
+ 
     enum GetType {
        case nearbyCities
        case detailsId
@@ -32,7 +32,7 @@ class NetworkManager {
         
         switch get {
         case .detailsId:
-            url = URL(string: byIdURL + "/" + String((location?.woeid)!))!
+            url = URL(string: byIdURL + String((location?.woeid)!))!
         case .nearbyCities:
             var latlong = ""
             if let coordinate = LocationManager.shared.location?.coordinate {
@@ -50,7 +50,7 @@ class NetworkManager {
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data {
                 switch get {
                 case .detailsId:
-                    self.locationById = self.parseId(data: data)
+                    self.cityById = self.parseId(data: data)
                 case .nearbyCities:
                     self.citiesNearby = self.parseNearby(data: data)
                 }

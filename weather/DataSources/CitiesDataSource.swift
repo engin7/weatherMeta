@@ -10,17 +10,17 @@ import UIKit
 
 class CitiesDataSource: NSObject, UITableViewDataSource {
     
-    private let network = NetworkManager.shared
+    private let networkManager = NetworkManager.shared
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return network.citiesNearby.count
+        return networkManager.citiesNearby.count
         }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CitiesTableViewCell
-        cell.city.text = network.citiesNearby[indexPath.row].title
+        cell.city.text = networkManager.citiesNearby[indexPath.row].title
         return  cell
     }
 }

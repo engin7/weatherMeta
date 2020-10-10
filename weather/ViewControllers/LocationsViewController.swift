@@ -17,7 +17,7 @@ class LocationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         location.requestLocationAuthorization()
-        
+
     }
  
      
