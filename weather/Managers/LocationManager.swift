@@ -96,12 +96,17 @@ extension LocationManager: CLLocationManagerDelegate {
                 default:
                     manager.requestWhenInUseAuthorization()
                     let title = "Location Services Disabled"
-                    let message = "Please enable Location Services in Settings"
+                    let message = "Please enable Location Services in Location Settings"
 
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    let action = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
-
-                    alert.addAction(action)
+                    let settingsAction = UIAlertAction(title: "Go to Location Settings", style: .default) { (_) -> Void in guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                            if UIApplication.shared.canOpenURL(settingsUrl) {
+                                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                    print("Settings opened: \(success)") // Prints true
+                                })
+                            }
+                        }
+                    alert.addAction(settingsAction)
                     UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController?.present(alert, animated: true, completion: nil)
         }
     }

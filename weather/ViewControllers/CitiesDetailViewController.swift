@@ -14,6 +14,7 @@ class CitiesDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        detailsTableView.allowsSelection = false
         detailsTableView.dataSource = tableViewDataSource
         detailsTableView.reloadData()
      }

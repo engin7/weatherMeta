@@ -17,14 +17,14 @@ class CitiesViewController: UIViewController, UITableViewDelegate, Loadable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(getNearbyCities), name: Notification.Name("locationOK"), object: nil)
         showLoadingView()
         self.title = "Nearby Cities"
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "Cities", style: .plain, target: nil, action: nil)
         citiesTableView.dataSource =  tableViewDataSource
         locationManager.locationOnce = false
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(getNearbyCities), name: Notification.Name("locationOK"), object: nil)
         }
     
     @objc func getNearbyCities(){
