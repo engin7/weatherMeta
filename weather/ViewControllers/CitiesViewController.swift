@@ -28,14 +28,8 @@ class CitiesViewController: UIViewController, UITableViewDelegate, Loadable {
         }
     
     @objc func getNearbyCities(){
-        networkManager.get(get: .nearbyCities, location: nil, completion: {success in
-            if success {
-                self.citiesTableView.reloadData()
-                self.hideLoadingView()
-            } else {
-                self.showNetworkError()
-            }
-        })
+        self.hideLoadingView()
+        self.citiesTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -61,14 +55,9 @@ class CitiesViewController: UIViewController, UITableViewDelegate, Loadable {
     
     func showNetworkError() {
         let alert = UIAlertController(title: "Sorry...", message: "Error occured connecting the Server. Please check your connection and try again.", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Retry", style: .default, handler: {
-        (UIAlertAction) in
-        self.getNearbyCities()
-        })
+        let action = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
         alert.addAction(action)
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true)
     }
-    }
-    
+}
  

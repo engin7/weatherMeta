@@ -64,6 +64,7 @@ class NetworkManager {
             }
         })
            dataTask?.resume()
+         
     }
     
     // MARK:- Private Methods

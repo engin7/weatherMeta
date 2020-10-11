@@ -111,7 +111,7 @@ extension LocationManager: CLLocationManagerDelegate {
         location = locations.last 
         locationOnce = true
         putAdress()
-        NotificationCenter.default.post(name: Notification.Name("locationOK"), object: nil)
+        Server.instance.getNearbyCities()
         }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
