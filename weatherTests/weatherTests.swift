@@ -9,18 +9,38 @@ import XCTest
 @testable import weather
 
 class weatherTests: XCTestCase {
+    
+    var sut : NetworkManager! //System Under Test
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+       
+        sut = NetworkManager.shared
+
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+        sut = nil
+     }
 
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let location = Location(title: "London", location_type: "city", latt_long: "test", woeid: 44418)
+        let promise = expectation(description: "Status code: 200")
+
+        sut.get(get: .detailsId, location: location, completion: { [self]success in
+            if success {
+                let weatherWeek = sut.cityById?.consolidatedWeather
+                let dayMax = Int(weatherWeek?.first?.max_temp ?? 0)
+                let dayMin = Int(weatherWeek?.first?.min_temp ?? 0)
+                
+                //  min degrees smaller than max
+                XCTAssertLessThanOrEqual(dayMin, dayMax)
+                promise.fulfill()
+
+             }
+        })
+          
+            wait(for: [promise], timeout: 5)
     }
 
     func testPerformanceExample() throws {
