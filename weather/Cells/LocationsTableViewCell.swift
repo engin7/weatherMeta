@@ -13,6 +13,7 @@ class LocationsTableViewCell:UITableViewCell {
     @IBOutlet weak var place: UILabel!
     @IBOutlet weak var adress: UILabel!
     @IBOutlet weak var phone: UILabel!
+    @IBOutlet weak var categoryImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

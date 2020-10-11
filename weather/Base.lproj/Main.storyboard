@@ -192,21 +192,29 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NKD-q1-fLg">
+                                                    <rect key="frame" x="16" y="11" width="90" height="90"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="YeO-GK-Pos" firstAttribute="leading" secondItem="rOx-KX-ZQi" secondAttribute="leadingMargin" constant="100" id="2Yc-mu-vb5"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Rb5-vu-zfz" secondAttribute="bottom" id="DHd-Gd-nFI"/>
                                                 <constraint firstItem="VxO-Do-wIU" firstAttribute="top" secondItem="YeO-GK-Pos" secondAttribute="bottom" constant="8" symbolic="YES" id="LhB-7z-BPi"/>
+                                                <constraint firstItem="YeO-GK-Pos" firstAttribute="leading" secondItem="NKD-q1-fLg" secondAttribute="trailing" constant="10" id="VW3-ee-QXn"/>
+                                                <constraint firstItem="NKD-q1-fLg" firstAttribute="bottom" secondItem="rOx-KX-ZQi" secondAttribute="bottomMargin" id="X2P-lx-mOm"/>
+                                                <constraint firstItem="NKD-q1-fLg" firstAttribute="leading" secondItem="rOx-KX-ZQi" secondAttribute="leadingMargin" id="b70-0A-YfL"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YeO-GK-Pos" secondAttribute="trailing" constant="20" symbolic="YES" id="gAG-za-eNS"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Rb5-vu-zfz" secondAttribute="trailing" constant="20" symbolic="YES" id="jSz-Rt-nqw"/>
                                                 <constraint firstItem="Rb5-vu-zfz" firstAttribute="leading" secondItem="VxO-Do-wIU" secondAttribute="leading" id="oOT-0a-sff"/>
                                                 <constraint firstItem="VxO-Do-wIU" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="rOx-KX-ZQi" secondAttribute="trailingMargin" constant="8" id="pcV-xi-of6"/>
                                                 <constraint firstItem="YeO-GK-Pos" firstAttribute="top" secondItem="rOx-KX-ZQi" secondAttribute="topMargin" id="q0i-MA-dpB"/>
+                                                <constraint firstItem="NKD-q1-fLg" firstAttribute="top" secondItem="rOx-KX-ZQi" secondAttribute="topMargin" id="s0C-Pf-TM9"/>
                                                 <constraint firstItem="VxO-Do-wIU" firstAttribute="leading" secondItem="rOx-KX-ZQi" secondAttribute="leadingMargin" constant="100" id="tMe-YF-SgI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="adress" destination="VxO-Do-wIU" id="ZWf-kE-eAt"/>
+                                            <outlet property="categoryImageView" destination="NKD-q1-fLg" id="tPn-nD-DfJ"/>
                                             <outlet property="phone" destination="Rb5-vu-zfz" id="Vkg-Ed-hMf"/>
                                             <outlet property="place" destination="YeO-GK-Pos" id="VHn-uh-IbZ"/>
                                         </connections>

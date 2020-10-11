@@ -24,6 +24,8 @@ class LocationsDataSource: NSObject, UITableViewDataSource {
         let adress = lookUpCurrentLocation(placemark: item.placemark)
         cell.adress.text = adress
         cell.phone.text = item.phoneNumber
+        let homeImage = UIImage(systemName: "house")
+        cell.categoryImageView.image = homeImage
         return  cell
     }
     
