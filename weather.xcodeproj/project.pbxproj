@@ -14,6 +14,8 @@
 		1032B3FC25322D5300D461AF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032B3FB25322D5300D461AF /* LoadingView.swift */; };
 		1032B40125322F1400D461AF /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032B40025322F1400D461AF /* Loadable.swift */; };
 		1032B40E2533091F00D461AF /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032B40D2533091E00D461AF /* Server.swift */; };
+		1032B416253359CF00D461AF /* LocationsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032B415253359CF00D461AF /* LocationsDataSource.swift */; };
+		1032B41E25336F8800D461AF /* LocationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032B41D25336F8800D461AF /* LocationsTableViewCell.swift */; };
 		10A14592252CFA9600609F59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A14591252CFA9600609F59 /* AppDelegate.swift */; };
 		10A14594252CFA9600609F59 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A14593252CFA9600609F59 /* SceneDelegate.swift */; };
 		10A14596252CFA9600609F59 /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A14595252CFA9600609F59 /* LocationsViewController.swift */; };
@@ -55,6 +57,8 @@
 		1032B3FB25322D5300D461AF /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		1032B40025322F1400D461AF /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		1032B40D2533091E00D461AF /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		1032B415253359CF00D461AF /* LocationsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsDataSource.swift; sourceTree = "<group>"; };
+		1032B41D25336F8800D461AF /* LocationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTableViewCell.swift; sourceTree = "<group>"; };
 		10A1458E252CFA9600609F59 /* weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10A14591252CFA9600609F59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10A14593252CFA9600609F59 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 		10A145FA252F6CA700609F59 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				1032B415253359CF00D461AF /* LocationsDataSource.swift */,
 				10A145F2252F6C9400609F59 /* CitiesDataSource.swift */,
 				1032B3D42531913E00D461AF /* WeatherDataSource.swift */,
 			);
@@ -209,6 +214,7 @@
 		10A14606252F6EAB00609F59 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1032B41D25336F8800D461AF /* LocationsTableViewCell.swift */,
 				10A14601252F6E9F00609F59 /* CitiesTableViewCell.swift */,
 				1032B3CF25318C0900D461AF /* WeatherTableViewCell.swift */,
 			);
@@ -354,8 +360,10 @@
 				1032B3D52531913E00D461AF /* WeatherDataSource.swift in Sources */,
 				10A14602252F6E9F00609F59 /* CitiesTableViewCell.swift in Sources */,
 				10A145CB252CFB0E00609F59 /* NetworkManager.swift in Sources */,
+				1032B416253359CF00D461AF /* LocationsDataSource.swift in Sources */,
 				10A145D6252D01DD00609F59 /* CitiesViewController.swift in Sources */,
 				10A145F3252F6C9400609F59 /* CitiesDataSource.swift in Sources */,
+				1032B41E25336F8800D461AF /* LocationsTableViewCell.swift in Sources */,
 				10A14592252CFA9600609F59 /* AppDelegate.swift in Sources */,
 				1032B3DA2531992800D461AF /* UIImageViewExtension.swift in Sources */,
 				10A14594252CFA9600609F59 /* SceneDelegate.swift in Sources */,

@@ -5,7 +5,6 @@
 //  Created by Engin KUK on 8.10.2020.
 //
 
-import Foundation
 import UIKit
 
 class CitiesDataSource: NSObject, UITableViewDataSource {

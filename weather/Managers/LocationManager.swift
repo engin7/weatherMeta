@@ -22,62 +22,36 @@ class LocationManager: NSObject {
     var adressOnce = false
     var delegate: LocationManagerDelegate?
     var location: CLLocation?
-    var addressString = ""
+    var places: [MKMapItem] = []
     
     private override init() {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-     }
-    
-    func putAdress() {
-        guard !adressOnce else { return }
-        adressOnce = true
-        lookUpCurrentLocation(completionHandler: { [self]placemark in
-            if placemark?.subLocality != nil {
-                 addressString = addressString + (placemark?.subLocality)! + ", "
-            }
-            if placemark?.thoroughfare != nil {
-                addressString = addressString + (placemark?.thoroughfare)! + ", "
-            }
-            if placemark?.locality != nil {
-                addressString = addressString + (placemark?.locality)! + ", "
-            }
-            if placemark?.country != nil {
-                addressString = addressString + (placemark?.country)! + ", "
-            }
-            if placemark?.postalCode != nil {
-                addressString = addressString + (placemark?.postalCode)! + " "
-            }
-            NotificationCenter.default.post(name: Notification.Name("adressOK"), object: nil)
-        })
+      }
+  
+    func search(location: CLLocation, queries: [String], index: Int) {
+            let request = MKLocalSearch.Request()
+            let coordinate = location.coordinate
+            request.region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1600, longitudinalMeters: 1600)
+               request.naturalLanguageQuery = queries[index]
+            MKLocalSearch(request: request).start { [self] (response, error) in
+                   guard error == nil else { return }
+                   guard let response = response else { return }
+                   guard response.mapItems.count > 0 else { return }
+
+                   for item in response.mapItems {
+                    places.append(item)
+                    
+                   }
+
+                   if index != 0 {
+                    self.search(location: location, queries: queries, index: index - 1)
+                   } else {
+                    NotificationCenter.default.post(name: Notification.Name("searchCompleted"), object: nil)
+                   }
+               }
     }
-    
-    func lookUpCurrentLocation(completionHandler: @escaping (CLPlacemark?)
-                                -> Void ) {
-        // Use the last reported location.
-        if let lastLocation = self.locationManager.location {
-            let geocoder = CLGeocoder()
-            
-            // Look up the location and pass it to the completion handler
-            geocoder.reverseGeocodeLocation(lastLocation,
-                                            completionHandler: { (placemarks, error) in
-                                                if error == nil {
-                                                    let firstLocation = placemarks?[0]
-                                                    completionHandler(firstLocation)
-                                                }
-                                                else {
-                                                    // An error occurred during geocoding.
-                                                    completionHandler(nil)
-                                                }
-                                            })
-        }
-        else {
-            // No location was available.
-            completionHandler(nil)
-        }
-    }
- 
     
 }
 
@@ -113,9 +87,11 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard !locationOnce else { return }
-        location = locations.last 
+        guard let lastLocation = locations.last else { return }
+        location = lastLocation
         locationOnce = true
-        putAdress()
+        let queries =  ["restaurants", "places", "hotel", "museum", "cafe"]
+        search(location: location!, queries: queries, index: queries.count-1)
         Server.instance.getNearbyCities()
         }
     

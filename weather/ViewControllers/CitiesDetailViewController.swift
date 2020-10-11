@@ -9,7 +9,7 @@ import UIKit
 
 class CitiesDetailViewController: UIViewController {
 
-    var tableViewDataSource = WeatherDataSource()
+    let tableViewDataSource = WeatherDataSource()
     @IBOutlet weak var detailsTableView: UITableView!
     
     override func viewDidLoad() {

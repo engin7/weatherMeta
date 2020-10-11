@@ -155,7 +155,7 @@
             </objects>
             <point key="canvasLocation" x="2495.1999999999998" y="1139.2803598200901"/>
         </scene>
-        <!--Location-->
+        <!--Nearby Places-->
         <scene sceneID="mj9-tv-vtu">
             <objects>
                 <viewController id="6FZ-XO-9jd" customClass="LocationsViewController" customModule="weather" customModuleProvider="target" sceneMemberID="viewController">
@@ -163,20 +163,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxi-Uu-Z4k">
-                                <rect key="frame" x="87" y="271" width="201" height="124"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="112" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lhK-Yj-bIU">
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="112" id="1TV-9x-YwG" customClass="LocationsTableViewCell" customModule="weather" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="112"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1TV-9x-YwG" id="rOx-KX-ZQi">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeO-GK-Pos">
+                                                    <rect key="frame" x="116" y="11" width="44" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adress" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VxO-Do-wIU">
+                                                    <rect key="frame" x="116" y="40.5" width="44.5" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rb5-vu-zfz">
+                                                    <rect key="frame" x="116" y="84" width="41" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="YeO-GK-Pos" firstAttribute="leading" secondItem="rOx-KX-ZQi" secondAttribute="leadingMargin" constant="100" id="2Yc-mu-vb5"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Rb5-vu-zfz" secondAttribute="bottom" id="DHd-Gd-nFI"/>
+                                                <constraint firstItem="VxO-Do-wIU" firstAttribute="top" secondItem="YeO-GK-Pos" secondAttribute="bottom" constant="8" symbolic="YES" id="LhB-7z-BPi"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YeO-GK-Pos" secondAttribute="trailing" constant="20" symbolic="YES" id="gAG-za-eNS"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Rb5-vu-zfz" secondAttribute="trailing" constant="20" symbolic="YES" id="jSz-Rt-nqw"/>
+                                                <constraint firstItem="Rb5-vu-zfz" firstAttribute="leading" secondItem="VxO-Do-wIU" secondAttribute="leading" id="oOT-0a-sff"/>
+                                                <constraint firstItem="VxO-Do-wIU" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="rOx-KX-ZQi" secondAttribute="trailingMargin" constant="8" id="pcV-xi-of6"/>
+                                                <constraint firstItem="YeO-GK-Pos" firstAttribute="top" secondItem="rOx-KX-ZQi" secondAttribute="topMargin" id="q0i-MA-dpB"/>
+                                                <constraint firstItem="VxO-Do-wIU" firstAttribute="leading" secondItem="rOx-KX-ZQi" secondAttribute="leadingMargin" constant="100" id="tMe-YF-SgI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="adress" destination="VxO-Do-wIU" id="ZWf-kE-eAt"/>
+                                            <outlet property="phone" destination="Rb5-vu-zfz" id="Vkg-Ed-hMf"/>
+                                            <outlet property="place" destination="YeO-GK-Pos" id="VHn-uh-IbZ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="delegate" destination="6FZ-XO-9jd" id="AfV-wO-9zF"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NZp-VA-iY5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lhK-Yj-bIU" firstAttribute="top" secondItem="NZp-VA-iY5" secondAttribute="top" id="7OX-oY-Vtc"/>
+                            <constraint firstItem="lhK-Yj-bIU" firstAttribute="trailing" secondItem="NZp-VA-iY5" secondAttribute="trailing" id="FKh-yj-kL7"/>
+                            <constraint firstItem="lhK-Yj-bIU" firstAttribute="leading" secondItem="NZp-VA-iY5" secondAttribute="leading" id="R2y-BG-owl"/>
+                            <constraint firstItem="lhK-Yj-bIU" firstAttribute="bottom" secondItem="NZp-VA-iY5" secondAttribute="bottom" id="TzL-Y2-tGu"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Location" id="2Nx-s4-O09"/>
+                    <navigationItem key="navigationItem" title="Nearby Places" id="2Nx-s4-O09"/>
                     <connections>
-                        <outlet property="adress" destination="nxi-Uu-Z4k" id="uQk-ri-aj4"/>
+                        <outlet property="locationsTableView" destination="lhK-Yj-bIU" id="5Ci-63-Zbq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UhD-dW-waq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -41,7 +41,7 @@ class CitiesViewController: UIViewController, UITableViewDelegate, Loadable {
          
         networkManager.get(get: .detailsId, location: result, completion: {success in
             if success {
-                vc.tableViewDataSource.cityWeather = self.networkManager.cityById?.consolidatedWeather
+                vc.tableViewDataSource.cityWeather = self.networkManager.cityById?.consolidatedWeather ?? []
                 vc.title = result.title
                 self.hideLoadingView()
                 self.navigationController?.pushViewController(vc, animated: true)
