@@ -102,6 +102,14 @@ extension LocationManager: CLLocationManagerDelegate {
                     manager.startUpdatingLocation()
                 default:
                     requestLocationAuthorization()
+                    let title = "Location Services Disabled"
+                    let message = "Please enable Location Services in Settings"
+
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let action = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+
+                    alert.addAction(action)
+                    UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController?.present(alert, animated: true, completion: nil)
         }
     }
     
