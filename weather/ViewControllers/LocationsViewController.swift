@@ -17,7 +17,6 @@ class LocationsViewController: UIViewController, Loadable {
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoadingView()
-        locationManager.requestLocationAuthorization()
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(reverseGeoCoding), name: Notification.Name("adressOK"), object: nil)
     }
@@ -25,6 +24,7 @@ class LocationsViewController: UIViewController, Loadable {
     @objc func reverseGeoCoding() {
         adress.text = locationManager.addressString
         self.hideLoadingView()
+        self.adress.setNeedsDisplay()
     }
      
 

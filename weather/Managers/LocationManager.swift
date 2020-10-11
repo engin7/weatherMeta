@@ -19,6 +19,7 @@ class LocationManager: NSObject {
     static let shared: LocationManager = LocationManager() //singleton
     private let locationManager: CLLocationManager = CLLocationManager()
     var locationOnce = false
+    var adressOnce = false
     var delegate: LocationManagerDelegate?
     var location: CLLocation?
     var addressString = ""
@@ -27,6 +28,11 @@ class LocationManager: NSObject {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+     }
+    
+    func putAdress() {
+        guard !adressOnce else { return }
+        adressOnce = true
         lookUpCurrentLocation(completionHandler: { [self]placemark in
             if placemark?.subLocality != nil {
                  addressString = addressString + (placemark?.subLocality)! + ", "
@@ -45,20 +51,6 @@ class LocationManager: NSObject {
             }
             NotificationCenter.default.post(name: Notification.Name("adressOK"), object: nil)
         })
-     }
-    
-    func requestLocationAuthorization() {
-        locationManager.requestWhenInUseAuthorization()
-    }
-    
-    func stopLocationManager() {
-        locationManager.stopUpdatingLocation()
-        locationManager.delegate = nil
-    }
-    
-    func startLocationManager() {
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
     }
     
     func lookUpCurrentLocation(completionHandler: @escaping (CLPlacemark?)
@@ -98,10 +90,11 @@ extension LocationManager: CLLocationManagerDelegate {
                     manager.requestWhenInUseAuthorization()
                 case .authorizedWhenInUse:
                     manager.startUpdatingLocation()
+                     _ = LocationManager.shared
                 case .authorizedAlways:
                     manager.startUpdatingLocation()
                 default:
-                    requestLocationAuthorization()
+                    manager.requestWhenInUseAuthorization()
                     let title = "Location Services Disabled"
                     let message = "Please enable Location Services in Settings"
 
@@ -117,6 +110,7 @@ extension LocationManager: CLLocationManagerDelegate {
         guard !locationOnce else { return }
         location = locations.last 
         locationOnce = true
+        putAdress()
         NotificationCenter.default.post(name: Notification.Name("locationOK"), object: nil)
         }
     
