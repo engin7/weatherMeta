@@ -16,6 +16,7 @@ class LocationsViewController: UIViewController, Loadable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationsTableView.allowsSelection = false
         self.title = "Nearby Places"
         showLoadingView()
         locationsTableView.dataSource = tableViewDataSource

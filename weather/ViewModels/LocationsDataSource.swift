@@ -11,7 +11,14 @@ import MapKit
 class LocationsDataSource: NSObject, UITableViewDataSource {
     
     private let locationManager = LocationManager.shared
-
+    
+    enum CategoryEnum: String {
+        case cafe  = "MKPOICategoryCafe"
+        case hotel = "MKPOICategoryHotel"
+        case restaurant = "MKPOICategoryRestaurant"
+        case museum = "MKPOICategoryMuseum"
+    }
+ 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return locationManager.places.count
@@ -24,8 +31,8 @@ class LocationsDataSource: NSObject, UITableViewDataSource {
         let adress = lookUpCurrentLocation(placemark: item.placemark)
         cell.adress.text = adress
         cell.phone.text = item.phoneNumber
-        let homeImage = UIImage(systemName: "house")
-        cell.categoryImageView.image = homeImage
+        let category = CategoryEnum(rawValue: item.pointOfInterestCategory?.rawValue ?? "")
+        cell.categoryImageView.image = setIcon(category: category)
         return  cell
     }
     
@@ -48,5 +55,23 @@ class LocationsDataSource: NSObject, UITableViewDataSource {
         }
         return addressString
     }
+    
+    func setIcon(category: CategoryEnum?) -> UIImage {
+        
+        switch category{
+        
+        case .cafe:
+            return #imageLiteral(resourceName: "cafe.png")
+        case .hotel:
+            return #imageLiteral(resourceName: "hotel.png")
+        case .restaurant:
+            return #imageLiteral(resourceName: "restaurant.png")
+        case .museum:
+            return #imageLiteral(resourceName: "museum.png")
+        default:
+            return #imageLiteral(resourceName: "place.png")
+        }
+    }
+    
 }
 
