@@ -11,27 +11,26 @@ import XCTest
 class weatherTests: XCTestCase {
     
     var sut : NetworkManager! //System Under Test
-
+    
+    
     override func setUpWithError() throws {
-       
         sut = NetworkManager.shared
-
     }
 
     override func tearDownWithError() throws {
         sut = nil
      }
 
-    func testExample() throws {
+    func testReturnsTheCorrectTemperatures() throws {
         
-        let location = Location(title: "London", location_type: "city", latt_long: "test", woeid: 44418)
+        let location = Location(title: nil, location_type: nil, latt_long: nil, woeid: 44418)
         let promise = expectation(description: "Status code: 200")
 
         sut.get(get: .detailsId, location: location, completion: { [self]success in
             if success {
                 let weatherWeek = sut.cityById?.consolidatedWeather
-                let dayMax = Int(weatherWeek?.first?.max_temp ?? 0)
-                let dayMin = Int(weatherWeek?.first?.min_temp ?? 0)
+                let dayMax = Int((weatherWeek?.first!.max_temp)!)
+                let dayMin = Int((weatherWeek?.first!.min_temp)!)
                 
                 //  min degrees smaller than max
                 XCTAssertLessThanOrEqual(dayMin, dayMax)
@@ -43,6 +42,31 @@ class weatherTests: XCTestCase {
             wait(for: [promise], timeout: 5)
     }
 
+    
+    func testReturnsTheCorrectDates() {
+       
+        let location = Location(title: nil, location_type: nil, latt_long: nil, woeid: 44418)
+        let promise = expectation(description: "Status code: 200")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'"
+        
+        sut.get(get: .detailsId, location: location, completion: { [self]success in
+            if success {
+                let weatherWeek = sut.cityById?.consolidatedWeather
+                let start = dateFormatter.date(from: (weatherWeek?.first!.applicable_date)!)!
+                let end = dateFormatter.date(from: (weatherWeek?.last!.applicable_date)!)!
+                //  days are in correct order
+                XCTAssertLessThanOrEqual(start, end)
+                promise.fulfill()
+
+             }
+        })
+          
+            wait(for: [promise], timeout: 5)
+   
+        
+    }
+  
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

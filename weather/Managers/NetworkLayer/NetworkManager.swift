@@ -11,7 +11,7 @@ import UIKit
 class NetworkManager {
     
     static let shared = NetworkManager() // singleton
- 
+    private let locationManager = LocationManager.shared
     private let nearbyURL = "https://www.metaweather.com/api/location/search/?lattlong="
     private let byIdURL = "https://www.metaweather.com/api/location/"  
     private var dataTask: URLSessionDataTask? = nil
@@ -35,7 +35,7 @@ class NetworkManager {
             url = URL(string: byIdURL + String((location?.woeid)!))!
         case .nearbyCities:
             var latlong = ""
-            if let coordinate = LocationManager.shared.location?.coordinate {
+            if let coordinate = locationManager.location?.coordinate {
                 latlong = String("\(coordinate.latitude),\(coordinate.longitude)")
             }
             url =  URL(string: nearbyURL + latlong)!
