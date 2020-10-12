@@ -10,9 +10,7 @@ import XCTest
 
 class weatherTests: XCTestCase {
     
-    var sut : NetworkManager! //System Under Test
-    
-    
+    private var sut : NetworkManager! //System Under Test
     override func setUpWithError() throws {
         sut = NetworkManager.shared
     }
@@ -65,6 +63,25 @@ class weatherTests: XCTestCase {
             wait(for: [promise], timeout: 5)
    
         
+    }
+    
+    func testReturnsTheCitiesNearby() throws {
+        
+        let location = Location(title: nil, location_type: nil, latt_long: "51.50,0.12", woeid: nil) // London
+        let promise = expectation(description: "Status code: 200")
+
+        sut.get(get: .nearbyCities, location: location, completion: { [self]success in
+            if success {
+                 
+               let numberOfCitiesFound = sut.citiesNearby.count
+                 //  should find some cities around London
+                XCTAssertNotEqual(numberOfCitiesFound, 0)
+                promise.fulfill()
+
+             }
+        })
+          
+            wait(for: [promise], timeout: 5)
     }
   
     func testPerformanceExample() throws {
