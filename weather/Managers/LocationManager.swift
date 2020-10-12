@@ -92,7 +92,9 @@ extension LocationManager: CLLocationManagerDelegate {
         locationOnce = true
         let queries =  ["restaurants", "places", "hotel", "museum", "cafe"]
         search(location: location!, queries: queries, index: queries.count-1)
-        Server.instance.getNearbyCities()
+        let coordinates = String("\(location!.coordinate.latitude),\(location!.coordinate.longitude)")
+        let currentLocationModel = Location(title: nil, location_type: nil, latt_long: coordinates, woeid: nil)
+        Server.instance.getNearbyCities(location: currentLocationModel)
         }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
