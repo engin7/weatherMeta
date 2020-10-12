@@ -115,8 +115,6 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="XaW-os-UMe" firstAttribute="top" secondItem="N5y-PJ-D7U" secondAttribute="bottom" constant="8" symbolic="YES" id="0XU-xr-gI9"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h8B-Lo-Nbd" secondAttribute="trailing" constant="20" symbolic="YES" id="6Jb-We-oJx"/>
-                                                <constraint firstItem="h8B-Lo-Nbd" firstAttribute="leading" secondItem="vk0-Zg-6ZQ" secondAttribute="leading" constant="184" id="BUB-ZW-rrb"/>
                                                 <constraint firstItem="XaW-os-UMe" firstAttribute="leading" secondItem="cVh-vi-9qd" secondAttribute="trailing" constant="22" id="FEk-6I-n3k"/>
                                                 <constraint firstItem="h8B-Lo-Nbd" firstAttribute="leading" secondItem="N5y-PJ-D7U" secondAttribute="trailing" constant="25" id="LOp-HQ-w9F"/>
                                                 <constraint firstItem="N5y-PJ-D7U" firstAttribute="baseline" secondItem="h8B-Lo-Nbd" secondAttribute="baseline" id="Ssd-AT-nij"/>

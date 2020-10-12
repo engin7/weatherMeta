@@ -11,25 +11,24 @@ class CitiesViewController: UIViewController, UITableViewDelegate, Loadable {
 
     private let tableViewDataSource = CitiesDataSource()
     private let networkManager = NetworkManager.shared
-    private let locationManager = LocationManager.shared
     
     @IBOutlet weak var citiesTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(getNearbyCities), name: Notification.Name("locationOK"), object: nil)
         showLoadingView()
         self.title = "Nearby Cities"
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "Cities", style: .plain, target: nil, action: nil)
         citiesTableView.dataSource =  tableViewDataSource
-        locationManager.locationOnce = false
+        if Server.instance.listingComplete {
+            loadCities()
+        }
         }
     
-    @objc func getNearbyCities(){
-        self.hideLoadingView()
+     func loadCities(){
         self.citiesTableView.reloadData()
+        self.hideLoadingView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

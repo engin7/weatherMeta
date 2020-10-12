@@ -11,11 +11,12 @@ class Server {  // to load nearByCities as soon as you get coordinates
     
     static let instance = Server()
     private let networkManager = NetworkManager.shared
-
+    var listingComplete = false
+    
     func getNearbyCities(){
-        networkManager.get(get: .nearbyCities, location: nil, completion: {success in
+        networkManager.get(get: .nearbyCities, location: nil, completion: { [self]success in
             if success {
-                NotificationCenter.default.post(name: Notification.Name("locationOK"), object: nil)
+                listingComplete = true
             } else {
                 self.showNetworkError()
         }

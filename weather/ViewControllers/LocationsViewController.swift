@@ -25,7 +25,6 @@ class LocationsViewController: UIViewController, Loadable {
     }
     
     @objc func reverseGeoCoding() {
-
         self.hideLoadingView()
         locationsTableView.reloadData()
     }
