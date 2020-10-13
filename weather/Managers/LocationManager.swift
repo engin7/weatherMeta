@@ -9,18 +9,11 @@ import UIKit
 import CoreLocation
 import MapKit
 
-protocol LocationManagerDelegate: class {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-}
-
 class LocationManager: NSObject {
     
     static let shared: LocationManager = LocationManager() //singleton
     private let locationManager: CLLocationManager = CLLocationManager()
     var locationOnce = false
-    var adressOnce = false
-    var delegate: LocationManagerDelegate?
     var location: CLLocation?
     var places: [MKMapItem] = []
     
@@ -99,7 +92,8 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
-        delegate?.locationManager(locationManager, didFailWithError: error)
+        manager.stopUpdatingLocation()
+        print("Failed to find user's location: \(error.localizedDescription)")
     }
 
 }
